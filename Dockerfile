@@ -15,7 +15,7 @@ RUN cd launcher && CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" 
 
 FROM alpine:3.20
 LABEL org.opencontainers.image.source="https://github.com/onepush-dev/juggleim"
-RUN apk add --no-cache bash tzdata ca-certificates caddy mysql-client \
+RUN apk add --no-cache bash tzdata ca-certificates caddy mysql-client mariadb-connector-c \
     && mkdir -p /opt/conf /opt/logs /opt/sql
 WORKDIR /opt
 COPY --from=builder /out/imserver /opt/imserver
