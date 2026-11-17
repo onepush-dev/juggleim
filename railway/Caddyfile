@@ -1,0 +1,19 @@
+{
+	admin off
+	auto_https off
+}
+:8080 {
+	@ws path /im /im/* /imbot /health
+	handle @ws {
+		reverse_proxy 127.0.0.1:9003
+	}
+	handle /apigateway/* {
+		reverse_proxy 127.0.0.1:9001
+	}
+	handle /navigator/* {
+		reverse_proxy 127.0.0.1:9002
+	}
+	handle {
+		reverse_proxy 127.0.0.1:8090
+	}
+}
